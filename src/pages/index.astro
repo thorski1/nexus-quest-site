@@ -1,0 +1,307 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "NEXUS Quest",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Linux, macOS, Windows",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "installUrl": "https://pypi.org/project/nexus-quest/",
+      "codeRepository": "https://github.com/thorski1/nexus-quest",
+      "description": "A cyberpunk terminal RPG that teaches Bash, Git, Docker, Kubernetes, AWS, Postgres, Python, Vim, SSH, Regex, and Linux through 600+ hands-on challenges.",
+      "screenshot": "https://nexusquest.dev/og-nexus.png",
+      "keywords": "terminal game, bash tutorial, devops game, linux learning, hacker RPG, free coding game",
+      "softwareVersion": "1.0.0",
+      "downloadUrl": "https://pypi.org/project/nexus-quest/#files",
+    },
+    {
+      "@type": "WebSite",
+      "name": "NEXUS Quest",
+      "url": "https://nexusquest.dev",
+    }
+  ]
+};
+
+const chapters = [
+  { n:1,  domain:"Bash",       mission:"Infiltrate a NEXUS workstation — filesystem, processes, pipelines",      icon:"$_",  color:"text-neon" },
+  { n:2,  domain:"SSH",        mission:"Pivot through seven jump hosts to reach the inner network",               icon:"🔐", color:"text-cyan" },
+  { n:3,  domain:"Vim",        mission:"Edit config files on servers with no GUI, no undo history",              icon:"✎",  color:"text-neon" },
+  { n:4,  domain:"Git",        mission:"Reconstruct eleven years of tampered commit history",                     icon:"⎇",  color:"text-cyan" },
+  { n:5,  domain:"Docker",     mission:"Audit containerized infrastructure for hidden misconfigurations",         icon:"□",  color:"text-neon" },
+  { n:6,  domain:"Postgres",   mission:"Extract 417 fraudulent transactions from the primary database",          icon:"⌘",  color:"text-cyan" },
+  { n:7,  domain:"Python",     mission:"Script the evidence packager — automate the delivery chain",             icon:"🐍", color:"text-neon" },
+  { n:8,  domain:"Regex",      mission:"Defeat the pattern filter between you and the drop site",                icon:".*", color:"text-cyan" },
+  { n:9,  domain:"Linux",      mission:"Own the delivery server — users, permissions, processes, logs",          icon:"🐧", color:"text-neon" },
+  { n:10, domain:"Kubernetes", mission:"Navigate the container orchestration cluster — pods, RBAC, Helm",        icon:"⛵", color:"text-cyan" },
+  { n:11, domain:"AWS",        mission:"Breach the cloud layer — IAM, S3, RDS, Lambda, VPC",                    icon:"☁",  color:"text-neon" },
+];
+---
+
+<BaseLayout
+  title="NEXUS Quest — Learn Bash, Git, Docker, Kubernetes & More Through a Cyberpunk Terminal RPG"
+  description="600+ challenges. 11 chapters. One objective. Become Ghost — a contract operative who learns Bash, SSH, Vim, Git, Docker, Postgres, Python, Regex, Linux, Kubernetes, and AWS for real. Free. Terminal-only."
+  schema={schema}
+>
+
+<!-- ── Nav ──────────────────────────────────────────────────────────────────── -->
+<nav style="position:sticky;top:0;z-index:100;background:rgba(3,11,14,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;">
+  <span style="color:var(--neon);font-weight:700;font-size:1.1rem;letter-spacing:0.05em;">NEXUS://QUEST</span>
+  <div style="display:flex;gap:2rem;font-size:0.85rem;">
+    <a href="#install" style="color:var(--muted);">Install</a>
+    <a href="#chapters" style="color:var(--muted);">Chapters</a>
+    <a href="https://github.com/thorski1/nexus-quest" style="color:var(--muted);" target="_blank" rel="noopener" id="nav-github" onclick="track('github_click',{location:'nav'})">GitHub</a>
+  </div>
+</nav>
+
+<!-- ── Hero ─────────────────────────────────────────────────────────────────── -->
+<section style="min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 2rem;text-align:center;position:relative;overflow:hidden;">
+
+  <!-- Background grid -->
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,170,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,170,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;"></div>
+
+  <!-- Glowing orb -->
+  <div style="position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(0,255,170,0.06) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+
+  <div style="position:relative;z-index:1;max-width:900px;">
+
+    <!-- Status bar -->
+    <div style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.35rem 1rem;border:1px solid var(--border);border-radius:999px;font-size:0.75rem;color:var(--muted);margin-bottom:2rem;background:var(--bg-2);">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--neon);display:inline-block;box-shadow:0 0 8px var(--neon);animation:blink 1s step-end infinite;"></span>
+      NEXUS CORP MAINFRAME — BREACH IN PROGRESS
+    </div>
+
+    <!-- ASCII logo -->
+    <pre style="color:var(--neon);font-size:clamp(0.5rem,1.8vw,1rem);line-height:1.3;margin:0 0 1rem;text-shadow:0 0 20px rgba(0,255,170,0.4);overflow-x:auto;">
+ _   _  _______   ___   _ _____
+| \ | ||  ___\ \ / / | | /  ___|
+|  \| || |__  \ V /| | | \ `--.
+| . ` ||  __| /   \| | | |`--. \
+| |\  || |___/ /^\ \ |_| /\__/ /
+\_| \_/\____/\/   \/\___/\____/
+</pre>
+
+    <h1 style="font-size:clamp(1.4rem,4vw,2.2rem);color:#ffffff;font-weight:700;margin:0.5rem 0 1rem;letter-spacing:-0.02em;line-height:1.2;">
+      Learn real DevOps skills.<br/>
+      <span style="color:var(--neon);">Through a hacker story.</span>
+    </h1>
+
+    <p style="font-size:clamp(0.95rem,2vw,1.15rem);color:var(--muted);max-width:600px;margin:0 auto 0.75rem;line-height:1.7;font-style:italic;">
+      "The terminal is not legacy. It is the only honest interface the machine has."
+    </p>
+
+    <p style="font-size:1rem;color:var(--text);max-width:640px;margin:0 auto 2.5rem;line-height:1.7;">
+      You are <strong style="color:var(--neon);">Ghost</strong> — a contract operative.
+      No exploit kits. No zero-days. Just your terminal, your knowledge,
+      and eight layers of systems between you and the truth.
+      Every skill you need, you have to learn for real.
+    </p>
+
+    <!-- CTA buttons -->
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="#install"
+         style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.85rem 2rem;background:var(--neon);color:var(--bg);font-weight:700;font-size:0.95rem;border-radius:4px;letter-spacing:0.05em;"
+         onclick="track('cta_install_click',{location:'hero'})">
+        INSTALL FREE →
+      </a>
+      <a href="https://github.com/thorski1/nexus-quest"
+         target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.85rem 2rem;border:1px solid var(--border);color:var(--text);font-size:0.95rem;border-radius:4px;"
+         onclick="track('github_click',{location:'hero'})">
+        View on GitHub
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div style="display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;margin-top:3rem;padding-top:3rem;border-top:1px solid var(--border);">
+      {[
+        {n:"600+",  label:"Challenges"},
+        {n:"11",    label:"Chapters"},
+        {n:"90+",   label:"Zones"},
+        {n:"Free",  label:"Forever"},
+      ].map(s => (
+        <div style="text-align:center;">
+          <div style="font-size:1.8rem;font-weight:700;color:var(--neon);">{s.n}</div>
+          <div style="font-size:0.75rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ── The Mission ───────────────────────────────────────────────────────────── -->
+<section style="padding:5rem 2rem;max-width:800px;margin:0 auto;">
+  <div style="border:1px solid var(--border);border-radius:8px;padding:2.5rem;background:var(--bg-2);font-size:0.9rem;line-height:1.8;font-family:'JetBrains Mono',monospace;">
+    <div style="color:var(--muted);margin-bottom:1rem;font-size:0.8rem;">// INCOMING TRANSMISSION</div>
+    <pre style="color:var(--neon);font-size:clamp(0.75rem,2vw,0.9rem);white-space:pre-wrap;margin:0;">
+NEXUS CORP MAINFRAME  //  INTERNAL FRAUD SUSPECTED
+EVIDENCE BURIED ACROSS MULTIPLE INFRASTRUCTURE LAYERS
+EXTRACT BEFORE THE MORNING ROTATION
+    — ANONYMOUS</pre>
+    <div style="margin-top:1.5rem;color:var(--text);">
+      <p style="margin:0 0 0.75rem;">You wake up with a contract on your screen.</p>
+      <p style="margin:0 0 0.75rem;">No client name. No callback address. Just a mission and a deadline.</p>
+      <p style="margin:0;color:var(--muted);">The catch: every tool in your arsenal, you have to earn. Every command, every flag,
+      every concept — learned in context, applied under pressure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Chapters ──────────────────────────────────────────────────────────────── -->
+<section id="chapters" style="padding:5rem 2rem;max-width:1100px;margin:0 auto;">
+  <h2 style="font-size:clamp(1.2rem,3vw,1.6rem);color:var(--neon);text-align:center;margin:0 0 0.5rem;letter-spacing:0.05em;text-transform:uppercase;">11 Chapters. 11 Skills.</h2>
+  <p style="text-align:center;color:var(--muted);margin:0 0 3rem;font-size:0.9rem;">Each chapter is a real mission. Each skill is a real tool professionals use every day.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;">
+    {chapters.map(ch => (
+      <div style="border:1px solid var(--border);border-radius:6px;padding:1.25rem;background:var(--bg-2);display:flex;gap:1rem;align-items:flex-start;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(0,255,170,0.4)'" onmouseleave="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.5rem;min-width:2rem;text-align:center;">{ch.icon}</div>
+        <div>
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem;">
+            <span style="color:var(--muted);font-size:0.75rem;">CH.{String(ch.n).padStart(2,'0')}</span>
+            <span style="color:var(--neon);font-weight:700;font-size:0.95rem;">{ch.domain}</span>
+          </div>
+          <p style="color:var(--muted);font-size:0.82rem;margin:0;line-height:1.5;">{ch.mission}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- ── Features ──────────────────────────────────────────────────────────────── -->
+<section style="padding:5rem 2rem;background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div style="max-width:1000px;margin:0 auto;">
+    <h2 style="font-size:clamp(1.2rem,3vw,1.6rem);color:var(--neon);text-align:center;margin:0 0 3rem;letter-spacing:0.05em;text-transform:uppercase;">Built for Real Learning</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;">
+      {[
+        { t:"Daily Challenge",   d:"One challenge per day with 2× XP and streak tracking. Shows up no matter which chapter you're on." },
+        { t:"Difficulty Modes",  d:"Easy, Normal, or Hard. Adjust XP multipliers and hint availability to match your pace." },
+        { t:"Speed Records",     d:"Per-challenge personal bests tracked and flashed on screen when you beat them." },
+        { t:"Live Sandbox",      d:"Some challenges run actual shell commands in a sandboxed temp directory. Real commands, real output." },
+        { t:"Star Ratings",      d:"Zones rated 1–3 stars based on hints used and challenges skipped. Perfect runs get all three." },
+        { t:"Bookmarks",         d:"Flag any challenge for later review. Come back to your weak spots from the main menu." },
+        { t:"Zone Preview",      d:"See the full challenge list before entering a zone. Know what you're getting into." },
+        { t:"XP & Levels",       d:"Rookie → Operative → Shadow → Ghost → Phantom → Specter. Earn your rank." },
+        { t:"Auto-updates",      d:"The game checks PyPI at startup and prompts you to update. Always on the latest content." },
+      ].map(f => (
+        <div style="padding:1.25rem;border:1px solid var(--border);border-radius:6px;background:var(--bg);">
+          <div style="color:var(--neon);font-weight:700;margin-bottom:0.5rem;font-size:0.9rem;">{f.t}</div>
+          <p style="color:var(--muted);font-size:0.82rem;margin:0;line-height:1.6;">{f.d}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ── Install ───────────────────────────────────────────────────────────────── -->
+<section id="install" style="padding:6rem 2rem;max-width:760px;margin:0 auto;">
+  <h2 style="font-size:clamp(1.2rem,3vw,1.6rem);color:var(--neon);text-align:center;margin:0 0 0.5rem;letter-spacing:0.05em;text-transform:uppercase;">Install</h2>
+  <p style="text-align:center;color:var(--muted);margin:0 0 3rem;font-size:0.9rem;">Python 3.10+ required. Works on Mac, Linux, and Windows.</p>
+
+  <!-- Tab buttons -->
+  <div id="install-tabs" style="display:flex;gap:0;margin-bottom:1rem;border:1px solid var(--border);border-radius:6px;overflow:hidden;">
+    <button onclick="switchTab('pip')"   id="tab-pip"   style="flex:1;padding:0.6rem 1rem;background:var(--neon);color:var(--bg);border:none;cursor:pointer;font-family:inherit;font-size:0.85rem;font-weight:700;">pip (recommended)</button>
+    <button onclick="switchTab('curl')"  id="tab-curl"  style="flex:1;padding:0.6rem 1rem;background:transparent;color:var(--muted);border:none;border-left:1px solid var(--border);cursor:pointer;font-family:inherit;font-size:0.85rem;">one-liner</button>
+    <button onclick="switchTab('win')"   id="tab-win"   style="flex:1;padding:0.6rem 1rem;background:transparent;color:var(--muted);border:none;border-left:1px solid var(--border);cursor:pointer;font-family:inherit;font-size:0.85rem;">Windows</button>
+  </div>
+
+  <!-- pip panel -->
+  <div id="panel-pip" style="border:1px solid var(--border);border-radius:6px;padding:1.5rem;background:var(--bg-2);">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;">
+      <span style="color:var(--muted);font-size:0.78rem;">Mac / Linux</span>
+      <button onclick="copy('pip install nexus-quest','copy-pip')" style="background:var(--bg-3);color:var(--neon);border:1px solid var(--border);padding:0.3rem 0.75rem;border-radius:4px;font-size:0.78rem;cursor:pointer;font-family:inherit;" id="copy-pip">Copy</button>
+    </div>
+    <pre style="margin:0;color:var(--neon);font-size:1rem;">pip install nexus-quest</pre>
+    <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;">
+        <span style="color:var(--muted);font-size:0.78rem;">Then run:</span>
+        <button onclick="copy('nexus-quest','copy-run')" style="background:var(--bg-3);color:var(--neon);border:1px solid var(--border);padding:0.3rem 0.75rem;border-radius:4px;font-size:0.78rem;cursor:pointer;font-family:inherit;" id="copy-run">Copy</button>
+      </div>
+      <pre style="margin:0;color:#ffffff;font-size:1rem;">nexus-quest</pre>
+    </div>
+  </div>
+
+  <!-- curl panel (hidden) -->
+  <div id="panel-curl" style="display:none;border:1px solid var(--border);border-radius:6px;padding:1.5rem;background:var(--bg-2);">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;">
+      <span style="color:var(--muted);font-size:0.78rem;">Mac / Linux — installs Python & pip if needed</span>
+      <button onclick="copy('curl -fsSL https://raw.githubusercontent.com/thorski1/nexus-quest/main/install.sh | bash','copy-curl')" style="background:var(--bg-3);color:var(--neon);border:1px solid var(--border);padding:0.3rem 0.75rem;border-radius:4px;font-size:0.78rem;cursor:pointer;font-family:inherit;" id="copy-curl">Copy</button>
+    </div>
+    <pre style="margin:0;color:var(--neon);font-size:0.82rem;white-space:pre-wrap;word-break:break-all;">curl -fsSL https://raw.githubusercontent.com/thorski1/nexus-quest/main/install.sh | bash</pre>
+  </div>
+
+  <!-- Windows panel (hidden) -->
+  <div id="panel-win" style="display:none;border:1px solid var(--border);border-radius:6px;padding:1.5rem;background:var(--bg-2);">
+    <p style="color:var(--muted);font-size:0.82rem;margin:0 0 0.75rem;">Open PowerShell and run:</p>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;">
+      <pre style="margin:0;color:var(--neon);font-size:0.75rem;white-space:pre-wrap;word-break:break-all;flex:1;">pip install nexus-quest</pre>
+      <button onclick="copy('pip install nexus-quest','copy-win')" style="background:var(--bg-3);color:var(--neon);border:1px solid var(--border);padding:0.3rem 0.75rem;border-radius:4px;font-size:0.78rem;cursor:pointer;font-family:inherit;white-space:nowrap;" id="copy-win">Copy</button>
+    </div>
+    <div style="margin-top:1rem;padding:0.75rem;background:var(--bg-3);border-radius:4px;font-size:0.78rem;color:var(--muted);">
+      ⓘ Best experience: use <a href="https://aka.ms/terminal" target="_blank" rel="noopener">Windows Terminal</a> (free, Microsoft Store). The default cmd.exe may display characters incorrectly.
+    </div>
+  </div>
+
+  <!-- Standalone packs -->
+  <div style="margin-top:2rem;padding:1.5rem;border:1px solid var(--border);border-radius:6px;background:var(--bg-2);">
+    <p style="color:var(--muted);font-size:0.82rem;margin:0 0 0.75rem;">Or practice a single skill:</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:0.5rem;">
+      {["terminal-quest","ssh-quest","vim-quest","git-quest","docker-quest","postgres-quest","python-quest","regex-quest","linux-quest","kubernetes-quest","aws-quest"].map(cmd => (
+        <code style="color:var(--neon);font-size:0.78rem;padding:0.25rem 0.5rem;background:var(--bg-3);border-radius:3px;display:block;">{cmd}</code>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────────────────────────────────────── -->
+<footer style="padding:2rem;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:0.8rem;">
+  <div style="margin-bottom:0.5rem;">
+    <a href="https://github.com/thorski1/nexus-quest" target="_blank" rel="noopener" onclick="track('github_click',{location:'footer'})">GitHub</a>
+    &nbsp;·&nbsp;
+    <a href="https://pypi.org/project/nexus-quest/" target="_blank" rel="noopener">PyPI</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/thorski1/quest-engine" target="_blank" rel="noopener">Quest Engine</a>
+  </div>
+  <div>Free and open source. MIT License.</div>
+  <div style="margin-top:0.5rem;font-size:0.72rem;color:#2a4a5a;">Powered by <a href="https://github.com/thorski1/quest-engine">Quest Engine</a></div>
+</footer>
+
+<script>
+  // ── Tab switching ────────────────────────────────────────────────────────────
+  function switchTab(tab) {
+    ['pip','curl','win'].forEach(t => {
+      const panel = document.getElementById('panel-' + t);
+      const btn   = document.getElementById('tab-' + t);
+      const active = t === tab;
+      panel.style.display   = active ? 'block' : 'none';
+      btn.style.background  = active ? 'var(--neon)' : 'transparent';
+      btn.style.color       = active ? 'var(--bg)' : 'var(--muted)';
+    });
+    track('install_tab_switch', { tab });
+  }
+
+  // ── Clipboard ────────────────────────────────────────────────────────────────
+  function copy(text, btnId) {
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById(btnId);
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.style.color = 'var(--neon)';
+      setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 2000);
+      track('install_copy', { command: text.split(' ')[0] === 'pip' ? 'pip' : text.startsWith('curl') ? 'curl' : 'win' });
+    });
+  }
+
+  // ── Analytics helper ─────────────────────────────────────────────────────────
+  function track(event, props = {}) {
+    if (typeof posthog !== 'undefined') {
+      posthog.capture(event, props);
+    }
+  }
+</script>
+
+</BaseLayout>

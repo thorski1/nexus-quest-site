@@ -1,0 +1,130 @@
+---
+import Analytics from '../components/Analytics.astro';
+
+interface Props {
+  title:       string;
+  description: string;
+  canonical?:  string;
+  ogImage?:    string;
+  schema?:     object;
+}
+
+const {
+  title,
+  description,
+  canonical = Astro.url.href,
+  ogImage   = '/og-nexus.png',
+  schema,
+} = Astro.props;
+
+const ogImageAbsolute = new URL(ogImage, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#030b0e" />
+
+  <!-- Primary SEO -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="thorski1" />
+  <meta name="keywords" content="terminal game, hacker game, learn bash, linux command line, devops training, cyberpunk RPG, git tutorial game, docker tutorial, kubernetes game, CLI game, python game, free coding game" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="NEXUS Quest" />
+  <meta property="og:url"         content={canonical} />
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image"       content={ogImageAbsolute} />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"   content="NEXUS Quest — cyberpunk terminal RPG" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image"       content={ogImageAbsolute} />
+
+  <!-- JSON-LD Structured Data -->
+  {schema && (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  )}
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" />
+
+  <!-- Analytics (PostHog + GA4) -->
+  <Analytics />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --neon:   #00ffaa;
+      --cyan:   #00e5ff;
+      --bg:     #030b0e;
+      --bg-2:   #061218;
+      --bg-3:   #0a1e27;
+      --border: #0d3340;
+      --muted:  #4a7a8a;
+      --text:   #c8e6f0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Subtle scanline overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 170, 0.015) 2px,
+        rgba(0, 255, 170, 0.015) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    ::selection { background: var(--neon); color: var(--bg); }
+
+    a { color: var(--neon); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .neon       { color: var(--neon); }
+    .neon-glow  { color: var(--neon); text-shadow: 0 0 20px rgba(0,255,170,0.6), 0 0 40px rgba(0,255,170,0.3); }
+    .cyan       { color: var(--cyan); }
+    .muted      { color: var(--muted); }
+    .border-neon{ border-color: rgba(0,255,170,0.25); }
+
+    pre, code { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body>
+  <slot />
+</body>
+</html>
